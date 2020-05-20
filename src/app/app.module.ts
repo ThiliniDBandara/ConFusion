@@ -14,6 +14,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -27,6 +32,7 @@ import { LeaderService } from './services/leader.service';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { from } from 'rxjs';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -38,7 +44,8 @@ import { from } from 'rxjs';
     FooterComponent,
     AboutComponent,
     HomeComponent,
-    ContactComponent
+    ContactComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -49,9 +56,18 @@ import { from } from 'rxjs';
     MatGridListModule,
     MatCardModule,
     MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [DishService,PromotionService,LeaderService],
+entryComponents: [
+  LoginComponent
+],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
