@@ -8,14 +8,23 @@ import { PROMOTIONS } from '../shared/promotions';
 export class PromotionService {
 
   constructor() { }
-  getPromotions(): Promotion[] {
-    return PROMOTIONS;
+  getPromotions(): Promise<Promotion[]> {
+    return  new Promise(resolve => {
+      // Simulate server latency 2 second delay
+      setTimeout(() => resolve(PROMOTIONS), 2000);
+  });
+}
+  getPromotion(id: string): Promise<Promotion> {
+    return  new Promise(resolve => {
+      // Simulate server latency 2 second delay
+      setTimeout(() => resolve(PROMOTIONS.filter((promo) => (promo.id == id))[0]), 2000);
+    });
   }
-  getPromotion(id: string): Promotion {
-    return PROMOTIONS.filter((promo) => (promo.id == id))[0];
-  }
-  getFearuredPromotion(): Promotion {
-    return PROMOTIONS.filter((promo) => promo.featured)[0];
+  getFearuredPromotion(): Promise<Promotion> {
+    return  new Promise(resolve => {
+      // Simulate server latency 2 second delay
+      setTimeout(() => resolve(PROMOTIONS.filter((promo) => promo.featured)[0]), 2000);
+    });
     }
 
 }
