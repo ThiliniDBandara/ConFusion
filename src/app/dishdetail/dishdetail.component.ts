@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild, Inject} from '@angular/core';
 import{Params, ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {Dish} from '../shared/dish';
 import {DishService} from '../services/dish.service';
-import { of, from } from 'rxjs';
-import{delay, switchMap} from 'rxjs/operators';
+import{ switchMap} from 'rxjs/operators';
 import{Comment} from  '../shared/comment';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
@@ -26,7 +25,7 @@ export class DishdetailComponent implements OnInit {
   comment:Comment;
   formErrors={
     'author': '',
-    'çomment':''
+    'comment':''
   };
   validationMessage={
     'author':{
@@ -36,7 +35,8 @@ export class DishdetailComponent implements OnInit {
     },
     'comment':{
       'required':'Comment is Required.',
-    
+      'minlength':'Author name must be a least 6 characters',
+      'maxlength':'Author Name cannot be more than 100 charactes'
     }
   };
   
@@ -44,16 +44,9 @@ export class DishdetailComponent implements OnInit {
     private route:ActivatedRoute,
     private location:Location,
     private fb:FormBuilder,
-   
-    ) {
-      
-     }
-
-  
+   @Inject('BaseURL') private BaseURL) {}
 
   ngOnInit(): void {
-
-    
 
     this.createForm();
     
@@ -77,8 +70,7 @@ export class DishdetailComponent implements OnInit {
     this.commentForm=this.fb.group({
       author:['',[Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
       rating:5,
-      comment:['',[Validators.required, Validators.minLength(2)]]
-
+      comment:['',[Validators.required, Validators.minLength(6), Validators.maxLength(100)]]
     });
     this.commentForm.valueChanges
     .subscribe(data=>this.onValueChanged(data));

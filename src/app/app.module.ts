@@ -18,6 +18,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import{MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import{MatSliderModule} from '@angular/material/slider';
 import { AppComponent } from './app.component';
+import { baseURL } from './shared/baseurl';
 
 
 import 'hammerjs';
@@ -28,6 +29,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { from } from 'rxjs';
@@ -73,13 +75,15 @@ import { importExpr } from '@angular/compiler/src/output/output_ast';
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HttpClientModule
     
   ],
   providers: [
     DishService,
     PromotionService,
-    LeaderService
+    LeaderService,
+    { provide: 'BaseURL', useValue: baseURL }
   ],
   entryComponents:[
     LoginComponent
