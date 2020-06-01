@@ -17,8 +17,8 @@ import {FormsModule} from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms';
 import{MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import{MatSliderModule} from '@angular/material/slider';
+import{HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { baseURL } from './shared/baseurl';
 
 
 import 'hammerjs';
@@ -29,7 +29,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
-import { HttpClientModule } from '@angular/common/http';
+
 
 
 import { from } from 'rxjs';
@@ -37,10 +37,13 @@ import { from } from 'rxjs';
 import{DishService} from './services/dish.service';
 import{PromotionService} from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
+import {ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component';
+import {baseURL} from './shared/baseurl';
 import { importExpr } from '@angular/compiler/src/output/output_ast';
+import { HighlightDirective } from './directives/highlight.directive';
 
 
 
@@ -54,7 +57,8 @@ import { importExpr } from '@angular/compiler/src/output/output_ast';
     HomeComponent,
     AboutComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
@@ -74,16 +78,17 @@ import { importExpr } from '@angular/compiler/src/output/output_ast';
     MatInputModule,
     MatCheckboxModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
-    FlexLayoutModule,
-    HttpClientModule
+    FlexLayoutModule
     
   ],
   providers: [
     DishService,
     PromotionService,
     LeaderService,
-    { provide: 'BaseURL', useValue: baseURL }
+    ProcessHTTPMsgService,
+    {provide: 'BaseURL', useValue: baseURL}
   ],
   entryComponents:[
     LoginComponent
